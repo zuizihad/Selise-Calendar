@@ -7,10 +7,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { AppointmentDetails } from "../appointment-details";
 
 export const Day = ({
     day,
-    events,
+    appointments,
     openModal,
     setStoredEvents,
 }) => {
@@ -26,7 +27,17 @@ export const Day = ({
                             </div>
 
                         </header>
-
+                        <div className="events">
+                            {appointments?.map((appointment) => (
+                                <div key={appointment.name} className={`event blue`}>
+                                    <AppointmentDetails
+                                        appointment={appointment}
+                                        date={day}
+                                        setStoredEvents={setStoredEvents}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </CardContent>
             </Card>

@@ -13,8 +13,12 @@ import { daysBefore, generateDates } from "../../utility/time";
 import { capitalizeFirstLetter } from "../../utility/capitalize";
 import { CalendarHeader } from "./header";
 import TopAppBar from "../Appbar";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Calendar = () => {
+    const dispatch = useDispatch();
+    const appointments = useSelector(state => state.appointments);
+    console.log("Appointments:", appointments);
     const [date, setDate] = useState(new Date());
     const [days, setDays] = useState(generateDates(date));
 
@@ -38,7 +42,9 @@ export const Calendar = () => {
                             <div className="parent">
                                 {days.map((day) => (
                                     <Day
+                                        key={day.toISOString()}
                                         day={day}
+                                        appointments={appointments.appointments}
                                     />
                                 ))}
                             </div>
